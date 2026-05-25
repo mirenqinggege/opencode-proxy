@@ -49,7 +49,9 @@ def register_dashboard(app, static_dir, conn, db_lock):
                 "total": row[0] + row[1] + row[2],
                 "count": row[3],
                 "success_count": row[4], "fail_count": row[5],
-                "avg_duration_ms": int(row[6])
+                "avg_duration_ms": int(row[6]),
+                "cache_hit_rate": f"{row[2]/row[0]*100:.4f}%" if row[0] else "0.0000%",
+                "request_success_rate": f"{row[4]/row[3]*100:.4f}%" if row[3] else "0.0000%"
             }
 
             rows = conn.execute(
@@ -71,7 +73,9 @@ def register_dashboard(app, static_dir, conn, db_lock):
                 "input": r[1], "output": r[2], "cache": r[3], "total": t,
                 "pct": f"{t/sum_total*100:.1f}%" if sum_total else "0%",
                 "count": r[4], "success_count": r[5], "fail_count": r[6],
-                "avg_duration_ms": int(r[7])
+                "avg_duration_ms": int(r[7]),
+                "cache_hit_rate": f"{r[3]/r[1]*100:.4f}%" if t else "0.0000%",
+                "request_success_rate": f"{r[5]/r[4]*100:.4f}%" if r[4] else "0.0000%"
             }
 
         return {"models": models, "totals": totals}
