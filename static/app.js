@@ -65,6 +65,8 @@ function renderStats(data) {
     document.getElementById('total-output').textContent = formatNumber(t.output);
     document.getElementById('total-cache').textContent = formatNumber(t.cache);
     document.getElementById('total-all').textContent = formatNumber(t.total);
+    document.getElementById('cache-hit-rate').textContent = t.cache_hit_rate || '0.0000%';
+    document.getElementById('request-success-rate').textContent = t.request_success_rate || '0.0000%';
     document.getElementById('total-success').textContent = formatNumber(t.success_count);
     document.getElementById('total-fail').textContent = formatNumber(t.fail_count);
     document.getElementById('avg-duration').textContent = t.avg_duration_ms ? formatNumber(t.avg_duration_ms) : '-';
