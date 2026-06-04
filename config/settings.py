@@ -42,6 +42,7 @@ MODELS = {
     "minimax-m2.7"     : {"endpoint": API_BASE_ANTHROPIC, "protocol": "anthropic"},
     "minimax-m2.5"     : {"endpoint": API_BASE_ANTHROPIC, "protocol": "anthropic"},
     "qwen3.7-max"      : {"endpoint": API_BASE_ANTHROPIC,    "protocol": "anthropic"},
+    "qwen3.7-plus"     : {"endpoint": API_BASE_ANTHROPIC,    "protocol": "anthropic"},
     "qwen3.6-plus"     : {"endpoint": API_BASE_ANTHROPIC,    "protocol": "anthropic"},
     "qwen3.5-plus"     : {"endpoint": API_BASE_ANTHROPIC,    "protocol": "anthropic"},
 }
