@@ -10,3 +10,9 @@ services:
     volumes:
       - ./logs:/app/logs
     restart: unless-stopped
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
