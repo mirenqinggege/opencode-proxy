@@ -1,6 +1,7 @@
 services:
   opencode-proxy:
     build: .
+    image: registry.cn-hangzhou.aliyuncs.com/mirenqinggege/opencode-proxy:latest
     ports:
       - "4000:4000"
       - "8082:8082"
