@@ -19,6 +19,7 @@ load_env_file()
 # Secrets (from .env or environment variables)
 PROXY = os.getenv("OPENCODE_PROXY")
 API_KEY = os.getenv("OPENCODE_API_KEY")
+AUTH_TOKEN = os.getenv("AUTH_TOKEN", "")
 
 API_BASE_OPENAI    = "https://opencode.ai/zen/go/v1/chat/completions"
 API_BASE_ANTHROPIC = "https://opencode.ai/zen/go/v1/messages"

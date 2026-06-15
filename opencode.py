@@ -17,7 +17,7 @@ import httpx
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import StreamingResponse
 
-from config import API_KEY, PROXY, MODELS, ROUTES, get_model_config, HOST, PORT, WEB_PORT, NO_MULTIMODAL
+from config import API_KEY, AUTH_TOKEN, PROXY, MODELS, ROUTES, get_model_config, HOST, PORT, WEB_PORT, NO_MULTIMODAL
 
 try:
     import tiktoken
@@ -535,6 +535,16 @@ async def messages(request: Request):
     req_id = f"msg_{uuid.uuid4().hex[:24]}"
     start_time = time.time()
 
+    # Auth check
+    if AUTH_TOKEN:
+        auth_header = request.headers.get("authorization", "")
+        if not auth_header.startswith("Bearer ") or auth_header[7:] != AUTH_TOKEN:
+            return Response(
+                content='{"type":"error","error":{"type":"authentication_error","message":"invalid or missing authorization token"}}',
+                status_code=401,
+                media_type="application/json"
+            )
+
     try:
         body = json.loads(await request.body())
     except Exception:
@@ -932,6 +942,16 @@ async def health():
 
 @app.post("/v1/messages/count_tokens")
 async def count_tokens(request: Request):
+    # Auth check
+    if AUTH_TOKEN:
+        auth_header = request.headers.get("authorization", "")
+        if not auth_header.startswith("Bearer ") or auth_header[7:] != AUTH_TOKEN:
+            return Response(
+                content='{"type":"error","error":{"type":"authentication_error","message":"invalid or missing authorization token"}}',
+                status_code=401,
+                media_type="application/json"
+            )
+
     try:
         body = json.loads(await request.body())
     except Exception:
